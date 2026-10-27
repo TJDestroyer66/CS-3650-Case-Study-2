@@ -1,0 +1,11 @@
+flowchart TD
+  A[Dashboard] --> B[Add task]
+  B --> C[Enter details]
+  C --> D{Valid?}
+  D -- No --> E[Inline errors and recovery]
+  E --> C
+  D -- Yes --> F[Review task]
+  F --> G{Edit?}
+  G -- Yes --> C
+  G -- No --> H[Save: loading state]
+  H --> I[Confirmation]

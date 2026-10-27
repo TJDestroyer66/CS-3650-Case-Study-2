@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Accessible student task manager prototype for a multi-step task creation flow.">
+  <title>StudyFlow — Student Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="StudyFlow home"><span class="brand-mark">S</span><span>StudyFlow</span></a>
+      <nav>
+        <a class="nav-link active" href="#dashboard" aria-current="page"><span aria-hidden="true">▦</span> My Tasks</a>
+        <a class="nav-link" href="#dashboard" data-filter-link="upcoming"><span aria-hidden="true">◷</span> Upcoming</a>
+        <a class="nav-link" href="#dashboard" data-filter-link="completed"><span aria-hidden="true">✓</span> Completed</a>
+      </nav>
+      <div class="sidebar-note"><span class="note-icon" aria-hidden="true">✦</span><p><strong>One step at a time.</strong><br>Small progress adds up.</p></div>
+      <div class="profile"><div class="avatar" aria-hidden="true">ST</div><div><strong>Student</strong><small>My workspace</small></div></div>
+    </aside>
+
+    <main id="main-content" class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">YOUR STUDY SPACE</p><h1 id="page-title">My tasks</h1></div>
+        <button id="add-task-top" class="button primary" type="button"><span aria-hidden="true">＋</span> Add task</button>
+      </header>
+
+      <section id="dashboard" aria-labelledby="dashboard-heading">
+        <div class="welcome-row">
+          <div><h2 id="dashboard-heading">Keep your momentum going</h2><p class="muted">Plan your work, make room to learn.</p></div>
+          <div class="date-chip" id="today-label">Your task planner</div>
+        </div>
+        <div class="stats-grid" aria-label="Task summary">
+          <article class="stat-card"><span class="stat-icon lavender" aria-hidden="true">▤</span><div><p>Total tasks</p><strong id="total-count">3</strong></div></article>
+          <article class="stat-card"><span class="stat-icon mint" aria-hidden="true">✓</span><div><p>Completed</p><strong id="completed-count">1</strong></div></article>
+          <article class="stat-card"><span class="stat-icon peach" aria-hidden="true">◷</span><div><p>Still to do</p><strong id="remaining-count">2</strong></div></article>
+        </div>
+
+        <div class="list-toolbar">
+          <div class="tabs" role="group" aria-label="Filter tasks">
+            <button class="tab active" type="button" data-filter="all" aria-pressed="true">All tasks</button>
+            <button class="tab" type="button" data-filter="todo" aria-pressed="false">To do</button>
+            <button class="tab" type="button" data-filter="completed" aria-pressed="false">Completed</button>
+          </div>
+          <label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search tasks</span><input id="search-input" type="search" placeholder="Search tasks…"></label>
+        </div>
+
+        <div id="task-list" class="task-list" aria-label="Tasks"></div>
+        <div id="empty-state" class="empty-state" hidden><div class="empty-icon" aria-hidden="true">✧</div><h3>No tasks here yet</h3><p>Add a task or choose another filter to see your work.</p><button class="button primary" id="empty-add" type="button">Create a task</button></div>
+      </section>
+
+      <section class="study-tip" aria-label="Study tip"><div class="tip-icon" aria-hidden="true">✦</div><div><strong>A little progress is still progress.</strong><p>Choose one task and give it your focus for 20 minutes.</p></div><span aria-hidden="true" class="tip-spark">✧</span></section>
+      <footer>StudyFlow prototype <span>·</span> Your tasks stay in this browser</footer>
+    </main>
+  </div>
+
+  <div id="task-dialog" class="modal-backdrop" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+      <button id="close-dialog" class="icon-button close-button" type="button" aria-label="Close task creator">×</button>
+      <div class="modal-heading"><span class="modal-mark" aria-hidden="true">✦</span><p class="eyebrow">MAKE A PLAN</p><h2 id="dialog-title">Create a new task</h2><p id="dialog-description" class="muted">Break your work into a clear next step.</p></div>
+      <div class="stepper" aria-label="Task creation progress">
+        <div class="step active" data-step-indicator="1"><span>1</span><small>Details</small></div><div class="step-line"></div>
+        <div class="step" data-step-indicator="2"><span>2</span><small>Review</small></div><div class="step-line"></div>
+        <div class="step" data-step-indicator="3"><span>3</span><small>Done</small></div>
+      </div>
+
+      <form id="task-form" novalidate>
+        <div id="details-step" class="form-step">
+          <div class="field"><label for="task-title">Task title <span aria-hidden="true">*</span></label><input id="task-title" name="title" maxlength="80" required aria-describedby="title-hint title-error" placeholder="e.g., Finish biology lab report"><div class="field-meta"><small id="title-hint">Use a short, specific title.</small><small id="title-counter">0/80</small></div><p id="title-error" class="field-error" hidden></p></div>
+          <div class="field"><label for="task-course">Course <span aria-hidden="true">*</span></label><input id="task-course" name="course" maxlength="60" required aria-describedby="course-error" placeholder="e.g., Biology 101"><p id="course-error" class="field-error" hidden></p></div>
+          <div class="field"><label for="task-description">Description <span class="optional">(optional)</span></label><textarea id="task-description" name="description" rows="3" maxlength="300" aria-describedby="description-counter" placeholder="Add notes or smaller steps…"></textarea><div class="field-meta"><span></span><small id="description-counter">0/300</small></div></div>
+          <div class="form-row">
+            <div class="field"><label for="task-due">Due date <span aria-hidden="true">*</span></label><input id="task-due" name="due" type="date" required aria-describedby="due-error"><p id="due-error" class="field-error" hidden></p></div>
+            <fieldset class="field priority-field"><legend>Priority <span aria-hidden="true">*</span></legend><div class="priority-options">
+              <label class="priority-option"><input type="radio" name="priority" value="Low"><span class="priority-dot low"></span><span>Low</span></label>
+              <label class="priority-option"><input type="radio" name="priority" value="Medium" checked><span class="priority-dot medium"></span><span>Medium</span></label>
+              <label class="priority-option"><input type="radio" name="priority" value="High"><span class="priority-dot high"></span><span>High</span></label>
+            </div></fieldset>
+          </div>
+          <div class="modal-actions"><button id="cancel-task" class="button secondary" type="button">Cancel</button><button id="continue-review" class="button primary" type="button">Review task <span aria-hidden="true">→</span></button></div>
+        </div>
+
+        <div id="review-step" class="form-step" hidden>
+          <div class="review-banner"><span aria-hidden="true">◎</span><div><strong>Take a quick look</strong><p>Make sure the details look right before saving.</p></div></div>
+          <dl id="review-details" class="review-card"></dl>
+          <div id="review-error" class="form-alert" role="alert" hidden></div>
+          <div class="modal-actions"><button id="back-to-details" class="button secondary" type="button"><span aria-hidden="true">←</span> Edit details</button><button id="save-task" class="button primary" type="submit">Save task <span aria-hidden="true">✓</span></button></div>
+        </div>
+
+        <div id="success-step" class="form-step success-step" hidden>
+          <div class="success-mark" aria-hidden="true">✓</div><h3>Task added!</h3><p id="success-message" class="muted">Your task is now on your list.</p>
+          <div class="success-summary" id="success-summary"></div>
+          <div class="modal-actions stacked"><button id="view-tasks" class="button primary" type="button">View my tasks</button><button id="create-another" class="button secondary" type="button">Create another task</button></div>
+        </div>
+      </form>
+      <div id="status-message" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+    </section>
+  </div>
+  <div id="toast-region" class="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
