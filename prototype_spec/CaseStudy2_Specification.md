@@ -174,15 +174,3 @@ Defining each component state forced me to consider what happens after every use
 ### 2. Describe a scenario where latency required specialized micro-interaction feedback. How does the design prevent repeated submissions?
 
 When a student saves a task, the interface immediately changes the button to “Saving…”, disables it, and announces the processing state through a polite live region. This tells both sighted users and screen-reader users that their action was received. The button remains disabled while the save is in progress, reducing accidental repeated submissions. The interface then announces success or displays an error with a recovery path. A production implementation should additionally prevent duplicate writes on the server.
-
-## 13. Final submission checklist
-
-- [ ] Publish the source repository publicly.
-- [ ] Host the prototype and add its public URL above.
-- [ ] Test the flow from dashboard through confirmation.
-- [ ] Test empty and past-date validation.
-- [ ] Test keyboard navigation and focus visibility.
-- [ ] Verify touch target sizes, including the task checkbox hit area.
-- [ ] Confirm contrast ratios with a contrast checker.
-- [ ] Verify public access in a private browser window.
-- [ ] Submit the single public GitHub repository URL.
