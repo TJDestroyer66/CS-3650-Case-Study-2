@@ -2,6 +2,10 @@
 
 A standalone, accessible medium-fidelity prototype created for an interaction specification assignment. Built with semantic HTML, CSS, and vanilla JavaScript. No backend or package installation is required.
 
+## Live Prototype
+
+[Open StudyFlow — Student Task Manager](https://tjdestroyer66.github.io/CS-3650-Case-Study-2/)
+
 ## Run locally
 1. Download or clone this repository.
 2. Open `index.html` in a modern browser.
