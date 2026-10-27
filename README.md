@@ -20,12 +20,5 @@ For local hosting, you can also run `python -m http.server 8000` from this folde
 ## Specification
 See [`prototype_spec/CaseStudy2_Specification.md`](prototype_spec/CaseStudy2_Specification.md) for the interaction flow, input mapping, component state matrix, accessibility decisions, and reflection answers.
 
-## Before submission
-- Publish this repository as public on GitHub.
-- Enable GitHub Pages (Settings → Pages → deploy from the `main` branch, root folder).
-- Open the published site in a private/incognito window to verify public access.
-- Add the live demo URL here and to the specification document.
-- Test keyboard navigation and contrast in your own browser before claiming a completed accessibility audit.
-
 ## Scope note
 This is a front-end prototype. Local browser storage is used to simulate persistence; there is no real account system, server-side storage, or backend authorization.
